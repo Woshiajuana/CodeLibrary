@@ -2,8 +2,8 @@
  * Created by Administrator on 2017/3/23.
  */
 ;(function (win,doc,undefiend) {
-    var touchStartEvent = '';
-    var touchMoveEvent = '';
+    var touchStartEvent = '',
+        touchMoveEvent = '';
     function DragMove (touchEle,targetEle){
         if(!touchEle) return this;
         if(!targetEle) targetEle = touchEle;
@@ -24,11 +24,11 @@
             event.preventDefault();
             // 如果这个元素的位置内只有一个手指的话
             if(event.targetTouches.length != 1) return;
-            var touch = event.targetTouches[0]; // 把元素放在手指所在的位置
-            var max_width = _this.WIDTH - _this.targetEle.offsetWidth;
-            var max_height = _this.HEIGHT - _this.targetEle.offsetWidth;
-            var drag_width = touch.pageX - _this.offLeft;
-            var drag_height = touch.pageY - _this.offTop;
+            var touch = event.targetTouches[0],
+                max_width = _this.WIDTH - _this.targetEle.offsetWidth,
+                max_height = _this.HEIGHT - _this.targetEle.offsetWidth,
+                drag_width = touch.pageX - _this.offLeft,
+                drag_height = touch.pageY - _this.offTop;
             if (drag_width <= 0) {
                 drag_width = 0;
             } else if (drag_width >= max_width) {
