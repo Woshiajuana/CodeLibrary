@@ -29,9 +29,13 @@
             upCallBackFun: function (distance) {
                 console.log(distance);
                 ele.innerHTML = '向上';
+                console.log(distance.x,x);
+                ele.style.transform = 'translate3d('+ (x + distance.x) +'px,0,0)';
             },
             downCallBackFun: function (distance) {
                 ele.innerHTML = '向下';
+                console.log(distance.x,x);
+                ele.style.transform = 'translate3d('+ (x + distance.x) +'px,0,0)';
             },
             leftCallBackFun: function (distance) {
                 ele.innerHTML = '向左';
