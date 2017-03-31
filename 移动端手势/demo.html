@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>移动端手势功能的实现</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <style>
+        *{margin: 0;padding: 0;}
+        body,html{width: 100%;height: 100%;}
+        .app{text-align: center;position: absolute;top: 0;right: 0;left: 0;bottom: 0;background-color: #66ffdf;line-height: 520px;font-size: 20px;font-weight: bold;}
+    </style>
+</head>
+<body>
+    <div class="app">滑动我哦</div>
+    <script src="GestureMobile.js"></script>
+    <script>
+        var ele = document.getElementsByClassName('app')[0];
+        GestureMobile(ele,{ //ele默认是doc.body
+            mode: 'touchmove',  //选项二‘touchend’ 默认touchend
+            sensitive: 10,      //默认10
+            failCallBackFun: function (distance) {
+                console.log(distance);
+                ele.innerHTML = '没动哦';
+            },
+            upCallBackFun: function (distance) {
+                console.log(distance);
+                ele.innerHTML = '向上';
+            },
+            downCallBackFun: function (distance) {
+                console.log(distance);
+                ele.innerHTML = '向下';
+            },
+            leftCallBackFun: function (distance) {
+                console.log(distance);
+                ele.innerHTML = '向左';
+            },
+            rightCallBackFun: function (distance) {
+                console.log(distance);
+                ele.innerHTML = '向右';
+            }
+        });
+    </script>
+</body>
+</html>
