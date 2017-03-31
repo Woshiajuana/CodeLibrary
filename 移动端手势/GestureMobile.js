@@ -14,6 +14,7 @@
         }
         this.mode = options.mode || 'touchend';
         this.sensitive = typeof options.sensitive != 'undefined' ? options.sensitive : 10;
+        this.touchStartCallBackFun = options.touchStartCallBackFun;
         this.upCallBackFun = options.upCallBackFun;
         this.downCallBackFun = options.downCallBackFun;
         this.leftCallBackFun = options.leftCallBackFun;
@@ -32,6 +33,7 @@
         that.ele.addEventListener("touchstart",function(ev){
             startX = ev.targetTouches[0].pageX;
             startY = ev.targetTouches[0].pageY;
+            that.touchStartCallBackFun && that.touchStartCallBackFun();
         },false);
         that.ele.addEventListener(that.mode,function(ev){
             if(that.mode == 'touchend'){

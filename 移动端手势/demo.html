@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <style>
         *{margin: 0;padding: 0;}
-        body,html{width: 100%;height: 100%;}
+        body,html{width: 100%;height: 100%;overflow: hidden;}
         .app{text-align: center;position: absolute;top: 0;right: 0;left: 0;bottom: 0;background-color: #66ffdf;line-height: 520px;font-size: 20px;font-weight: bold;}
     </style>
 </head>
@@ -15,9 +15,13 @@
     <script src="GestureMobile.js"></script>
     <script>
         var ele = document.getElementsByClassName('app')[0];
+        var x = 0;
         GestureMobile(ele,{ //ele默认是doc.body
             mode: 'touchmove',  //选项二‘touchend’ 默认touchend
-            sensitive: 10,      //默认10
+            sensitive: 0,      //默认10
+            touchStartCallBackFun: function () {
+                x = getTransLate3dValue(ele);
+            },
             failCallBackFun: function (distance) {
                 console.log(distance);
                 ele.innerHTML = '没动哦';
@@ -27,18 +31,26 @@
                 ele.innerHTML = '向上';
             },
             downCallBackFun: function (distance) {
-                console.log(distance);
                 ele.innerHTML = '向下';
             },
             leftCallBackFun: function (distance) {
-                console.log(distance);
                 ele.innerHTML = '向左';
+                console.log(distance.x,x);
+                ele.style.transform = 'translate3d('+ (x + distance.x) +'px,0,0)';
             },
             rightCallBackFun: function (distance) {
-                console.log(distance);
                 ele.innerHTML = '向右';
+                console.log(distance.x,x);
+                ele.style.transform = 'translate3d('+ (x + distance.x) +'px,0,0)';
             }
         });
+        //首先要获取translate的值
+        function getTransLate3dValue(ele){
+            var transform = ele.style.transform;
+            if(!transform || transform.indexOf('translate3d') == -1) return 0;
+            var transformX = transform.substring(transform.indexOf('3d(') + 3,transform.indexOf('px'));
+            return parseInt(transformX);
+        }
     </script>
 </body>
 </html>
